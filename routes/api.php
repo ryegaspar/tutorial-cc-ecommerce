@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Category;
+
 Route::get('/', function () {
-    return 'hello';
+    $categories = Category::parents()->get();
+    dd($categories);
 });
