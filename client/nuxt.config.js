@@ -35,7 +35,13 @@ export default {
     /*
     ** Nuxt.js modules
     */
-    modules: [],
+    modules: [
+        '@nuxtjs/axios'
+    ],
+
+    axios: {
+        baseURL: 'http://cc-e-commerce.test/api'
+    },
     /*
     ** Build configuration
     */
