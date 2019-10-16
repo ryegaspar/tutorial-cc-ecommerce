@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Products;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -15,5 +16,17 @@ class ProductTest extends TestCase
         $product = new Product();
 
         $this->assertEquals($product->getRouteKeyName(), 'slug');
+    }
+
+    /** @test */
+    public function it_has_many_categories()
+    {
+        $product = factory(Product::class)->create();
+
+        $product->categories()->save(
+            factory(Category::class)->create()
+        );
+
+        $this->assertInstanceOf(Category::class, $product->categories->first());
     }
 }
