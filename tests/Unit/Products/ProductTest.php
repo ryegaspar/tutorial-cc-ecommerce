@@ -41,6 +41,5 @@ class ProductTest extends TestCase
         );
 
         $this->assertInstanceOf(ProductVariation::class, $product->variations->first());
-
     }
 }
