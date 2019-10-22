@@ -61,5 +61,4 @@ class ProductTest extends TestCase
 
         $this->assertEquals($product->formattedPrice, '$10.00');
     }
-
 }
