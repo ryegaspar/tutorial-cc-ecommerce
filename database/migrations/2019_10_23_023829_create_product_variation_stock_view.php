@@ -14,6 +14,8 @@ class CreateProductVariationStockView extends Migration
      */
     public function up()
     {
+        DB::statement('DROP VIEW IF EXISTS product_variation_stock_view');
+
         DB::statement('
         CREATE VIEW product_variation_stock_view AS
             SELECT product_variations.product_id AS `product_id`,
