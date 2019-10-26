@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _23372e28 = () => interopDefault(import('../pages/auth/signin.vue' /* webpackChunkName: "pages/auth/signin" */))
 const _70a58728 = () => interopDefault(import('../pages/categories/_slug.vue' /* webpackChunkName: "pages/categories/_slug" */))
 const _295a5aa0 = () => interopDefault(import('../pages/products/_slug.vue' /* webpackChunkName: "pages/products/_slug" */))
 const _02a8445e = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
@@ -17,6 +18,10 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+      path: "/auth/signin",
+      component: _23372e28,
+      name: "auth-signin"
+    }, {
       path: "/categories/:slug?",
       component: _70a58728,
       name: "categories-slug"
