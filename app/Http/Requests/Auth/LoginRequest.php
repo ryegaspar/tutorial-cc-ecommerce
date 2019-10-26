@@ -2,11 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
 {
@@ -33,17 +29,5 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    // overwrite this to avoid redirect error
-    protected function failedValidation(Validator $validator)
-    {
-        $errors = (new ValidationException($validator))->errors();
-
-        throw new HttpResponseException(
-            response()->json(['errors' => $errors], JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-        );
-//        throw (new ValidationException($validator))
-//            ->errorBag($this->errorBag)
-//            ->redirectTo($this->getRedirectUrl());
-    }
-
+    // in popstman, under headers, add key =  Accept, value = application/json, to emulate json
 }
