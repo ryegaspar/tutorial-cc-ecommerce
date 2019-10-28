@@ -31,6 +31,15 @@ export const actions = {
         let response = await this.$axios.$delete(`cart/${productId}`);
 
         dispatch('getCart');
+    },
+
+    async update({dispatch}, { productId, quantity }) {
+        let response = await this.$axios.$patch(`cart/${productId}`, {
+            quantity
+        });
+
+        dispatch('getCart');
     }
+
 };
 
