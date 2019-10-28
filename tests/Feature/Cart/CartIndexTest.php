@@ -32,4 +32,14 @@ class CartIndexTest extends TestCase
             ]);
     }
 
+    /** @test */
+    public function it_shows_if_the_cart_is_empty()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->jsonAs($user, 'GET', 'api/cart')
+            ->assertJsonFragment([
+                'empty' => true
+            ]);
+    }
 }
