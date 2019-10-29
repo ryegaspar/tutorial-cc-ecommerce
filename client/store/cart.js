@@ -1,5 +1,6 @@
 export const state = () => ({
-    products: []
+    products: [],
+    empty: true
 });
 
 export const getters = {
@@ -9,13 +10,22 @@ export const getters = {
 
     count(state) {
         return state.products.length
+    },
+
+    empty(state) {
+        return state.empty
     }
 };
 
 export const mutations = {
     SET_PRODUCTS(state, products) {
         state.products = products
+    },
+
+    SET_EMPTY(state, empty) {
+        state.empty = empty
     }
+
 };
 
 export const actions = {
@@ -23,6 +33,7 @@ export const actions = {
         let response = await this.$axios.$get('cart');
 
         commit('SET_PRODUCTS', response.data.products);
+        commit('SET_EMPTY', response.meta.empty);
 
         return response;
     },
@@ -40,6 +51,5 @@ export const actions = {
 
         dispatch('getCart');
     }
-
 };
 
