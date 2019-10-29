@@ -26,15 +26,17 @@ class CartController extends Controller
         ]);
 
         return (new CartResource($request->user()))
-        ->additional([
-            'meta' => $this->meta($cart)
-        ]);
+            ->additional([
+                'meta' => $this->meta($cart)
+            ]);
     }
 
     protected function meta(Cart $cart)
     {
         return [
-            'empty' => $cart->isEmpty(),
+            'empty'    => $cart->isEmpty(),
+            'subtotal' => $cart->subtotal()->formatted(),
+            'total'    => $cart->total()->formatted(),
         ];
     }
 
