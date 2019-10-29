@@ -24,21 +24,22 @@
 </template>
 
 <script>
-    import CartOverview from '@/components/cart/CartOverview';
-    import { mapGetters } from 'vuex';
+	import CartOverview from '@/components/cart/CartOverview';
+	import {mapGetters} from 'vuex';
 
-    export default {
+	export default {
 
-    	components: {
-    		CartOverview
-        },
+		components: {
+			CartOverview
+		},
 
-        computed: {
-    		...mapGetters({
-                empty: 'cart/empty',
-                products: 'cart/products'
-            })
-        }
+		computed: {
+			...mapGetters({
+				empty: 'cart/empty',
+				products: 'cart/products',
+				changed: 'cart/changed'
+			})
+		}
 
-    }
+	}
 </script>
