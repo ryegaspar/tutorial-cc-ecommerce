@@ -6,13 +6,36 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
+    protected $casts =[
+        'default' => 'boolean'
+    ];
+
     protected $fillable = [
         'name',
+        'default',
         'address_1',
         'city',
         'postal_code',
         'country_id',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($address) {
+            if ($address->default) {
+                $address->user->addresses()->update([
+                    'default' => false
+                ]);
+            }
+        });
+    }
+
+    public function setDefaultAttribute($value)
+    {
+        $this->attributes['default'] = ($value === 'true' || $value ? true : false);
+    }
 
     public function user()
     {
