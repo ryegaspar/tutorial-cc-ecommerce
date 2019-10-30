@@ -9,13 +9,13 @@
                         <cart-overview></cart-overview>
                     </article>
 
-                    <a
-                        href="#"
+                    <nuxt-link
+                        :to="{ name: 'checkout'}"
                         v-if="!empty"
                         class="button is-fullwidth is-info is-medium"
                     >
                         Checkout
-                    </a>
+                    </nuxt-link>
                     <p v-else>Your cart is empty</p>
                 </div>
             </div>
