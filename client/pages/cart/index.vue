@@ -40,6 +40,5 @@
 				changed: 'cart/changed'
 			})
 		}
-
 	}
 </script>
