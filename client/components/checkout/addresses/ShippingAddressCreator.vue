@@ -35,9 +35,7 @@
                     <label class="label">Country</label>
                     <div class="control">
                         <div class="select is-fullwidth">
-                            <select v-model="form.country_id" >
-                                <option value="1">Afganistan</option>
-                            </select>
+                            <country-dropdown v-model="form.country_id"></country-dropdown>
                         </div>
                     </div>
                 </div>
@@ -60,6 +58,8 @@
 </template>
 
 <script>
+    import CountryDropdown from "../../form/CountryDropdown";
+
 	export default {
 
 		data() {
@@ -73,6 +73,10 @@
 					default: true
 				}
             }
+        },
+
+        components: {
+			CountryDropdown
         },
 
         methods: {
