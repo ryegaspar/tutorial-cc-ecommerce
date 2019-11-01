@@ -13,6 +13,16 @@ use Tests\TestCase;
 class OrderTest extends TestCase
 {
     /** @test */
+    public function it_has_a_default_status_of_pending()
+    {
+        $order = factory(Order::class)->create([
+            'user_id' => factory(User::class)->create()->id
+        ]);
+
+        $this->assertEquals(Order::PENDING, $order->status);
+    }
+
+    /** @test */
     public function it_belongs_to_a_user()
     {
         $order = factory(Order::class)->create([
