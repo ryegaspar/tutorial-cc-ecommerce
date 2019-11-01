@@ -3,7 +3,9 @@
         <div class="container is-fluid">
             <div class="columns">
                 <div class="column is-three-quarters">
-                    <shipping-address :addresses="addresses">
+                    <shipping-address :addresses="addresses"
+                                      v-model="form.address_id"
+                    >
                     </shipping-address>
 
                     <article class="message">
@@ -85,7 +87,10 @@
 	export default {
 		data() {
 			return {
-				addresses: []
+				addresses: [],
+                form: {
+					address_id: null,
+                }
 			}
 		},
 
