@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('address_id')->index();
             $table->unsignedBigInteger('shipping_method_id')->index();
             $table->string('status')->default('pending');
+            $table->integer('subtotal');
             $table->timestamps();
 
             $table->foreign('user_id')
