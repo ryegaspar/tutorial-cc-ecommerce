@@ -102,6 +102,10 @@ class OrderStoreTest extends TestCase
     {
         $user = factory(User::class)->create();
 
+        $user->cart()->sync(
+            $product = $this->productWithStock()
+        );
+
         list($address, $shipping) = $this->orderDependencies($user);
 
         $this->jsonAs($user, 'POST', 'api/orders',
