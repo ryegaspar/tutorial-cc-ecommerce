@@ -29,6 +29,6 @@ class DatabaseSeeder extends Seeder
      * country_shipping_method
      *      232     1
      *      231     2
-     *      232     2
+     *      232     3
      */
 }
