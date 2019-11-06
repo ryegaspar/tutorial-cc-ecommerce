@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
     }
 
     /*
-     * products Coffee, coffee, 10000
      *** category_product 1, 1
      * country_shipping_method
      *      232     1
