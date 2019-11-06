@@ -96,26 +96,26 @@
 			return {
 				submitting: false,
 				addresses: [],
-                shippingMethods: [],
-                form: {
+				shippingMethods: [],
+				form: {
 					address_id: null,
-                    shipping_method_id: null
-                }
+					shipping_method_id: null
+				}
 			}
 		},
 
-        watch: {
-			'form.address_id' (addressId) {
+		watch: {
+			'form.address_id'(addressId) {
 				this.getShippingMethodsForAddress(addressId)
-                    .then(() => {
-                    	this.setShipping(this.shippingMethods[0]);
-                    })
-            },
+					.then(() => {
+						this.setShipping(this.shippingMethods[0]);
+					})
+			},
 
-            shippingMethodId() {
+			shippingMethodId() {
 				this.getCart()
-            }
-        },
+			}
+		},
 
 		components: {
 			ShippingAddress,
@@ -127,44 +127,49 @@
 				total: 'cart/total',
 				products: 'cart/products',
 				empty: 'cart/empty',
-                shipping: 'cart/shipping'
+				shipping: 'cart/shipping'
 			}),
 
-            shippingMethodId: {
+			shippingMethodId: {
 				get() {
 					return this.shipping ? this.shipping.id : ''
-                },
+				},
 
-                set(shippingMethodId) {
+				set(shippingMethodId) {
 					this.setShipping(this.shippingMethods.find(s => s.id === shippingMethodId))
-                }
-            }
+				}
+			}
 		},
 
-        methods: {
+		methods: {
 			...mapActions({
-                setShipping: 'cart/setShipping',
-                getCart: 'cart/getCart'
+				setShipping: 'cart/setShipping',
+				getCart: 'cart/getCart',
+				flash: 'alert/flash'
 			}),
 
-            async order() {
+			async order() {
 				this.submitting = true;
 
 				try {
 					await this.$axios.$post('orders', {
 						...this.form,
-                        shipping_method_id: this.shippingMethodId
-                    });
+						shipping_method_id: this.shippingMethodId
+					});
 
-                    await this.getCart();
+					await this.getCart();
 
-                    this.$router.replace({
-                        name: 'orders'
-                    });
-                } catch (e) {
+					this.$router.replace({
+						name: 'orders'
+					});
+				} catch (e) {
+					this.flash(e.response.data.message);
 
+					this.getCart();
 				}
-            },
+
+				this.submitting = false;
+			},
 
 			async getShippingMethodsForAddress(addressId) {
 				let response = await this.$axios.$get(`addresses/${addressId}/shipping`);

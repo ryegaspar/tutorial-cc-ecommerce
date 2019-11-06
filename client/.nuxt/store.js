@@ -18,6 +18,7 @@ void (function updateModules() {
   // Enforce store modules
   store.modules = store.modules || {}
 
+  resolveStoreModules(require('../store/alert.js'), 'alert.js')
   resolveStoreModules(require('../store/cart.js'), 'cart.js')
 
   // If the environment supports hot reloading...
@@ -25,6 +26,7 @@ void (function updateModules() {
   if (process.client && module.hot) {
     // Whenever any Vuex module is updated...
     module.hot.accept([
+      '../store/alert.js',
       '../store/cart.js',
       '../store/index.js',
     ], () => {
