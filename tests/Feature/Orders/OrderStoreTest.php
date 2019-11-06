@@ -25,6 +25,10 @@ class OrderStoreTest extends TestCase
     {
         $user = factory(User::class)->create();
 
+        $user->cart()->sync(
+            $product = $this->productWithStock()
+        );
+
         $this->jsonAs($user, 'POST', 'api/orders')
             ->assertJsonValidationErrors(['address_id']);
     }
@@ -33,6 +37,10 @@ class OrderStoreTest extends TestCase
     public function it_requires_an_address_that_exists()
     {
         $user = factory(User::class)->create();
+
+        $user->cart()->sync(
+            $product = $this->productWithStock()
+        );
 
         $this->jsonAs($user, 'POST', 'api/orders',
             [
@@ -45,6 +53,10 @@ class OrderStoreTest extends TestCase
     public function it_requires_an_address_that_belongs_to_the_authenticated_user()
     {
         $user = factory(User::class)->create();
+
+        $user->cart()->sync(
+            $product = $this->productWithStock()
+        );
 
         $address = factory(Address::class)->create([
             'user_id' => factory(User::class)->create()->id
@@ -62,6 +74,10 @@ class OrderStoreTest extends TestCase
     {
         $user = factory(User::class)->create();
 
+        $user->cart()->sync(
+            $product = $this->productWithStock()
+        );
+
         $this->jsonAs($user, 'POST', 'api/orders')
             ->assertJsonValidationErrors(['shipping_method_id']);
     }
@@ -70,6 +86,10 @@ class OrderStoreTest extends TestCase
     public function it_requires_a_shipping_method_that_exists()
     {
         $user = factory(User::class)->create();
+
+        $user->cart()->sync(
+            $product = $this->productWithStock()
+        );
 
         $this->jsonAs($user, 'POST', 'api/orders',
             [
@@ -82,6 +102,10 @@ class OrderStoreTest extends TestCase
     public function it_requires_a_shipping_method_valid_for_the_given_address()
     {
         $user = factory(User::class)->create();
+
+        $user->cart()->sync(
+            $product = $this->productWithStock()
+        );
 
         $address = factory(Address::class)->create([
             'user_id' => $user->id,
@@ -186,7 +210,7 @@ class OrderStoreTest extends TestCase
                 'shipping_method_id' => $shipping->id
             ]);
 
-        Event::assertDispatched(OrderCreated::class, function($event) use ($response) {
+        Event::assertDispatched(OrderCreated::class, function ($event) use ($response) {
             return $event->order->id === json_decode($response->getContent())->data->id;
         });
     }
