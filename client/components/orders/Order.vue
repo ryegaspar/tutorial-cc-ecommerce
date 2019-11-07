@@ -26,17 +26,16 @@
         </td>
         <td>{{ order.subtotal }}</td>
         <td>
-            <span class="tag is-medium"
-                  :class="statusClasses"
-            >
-                {{ order.status }}
-            </span>
+            <component :is="order.status"></component>
         </td>
     </tr>
 
 </template>
 
 <script>
+    import OrderStatusPaymentFailed from '@/components/orders/statuses/OrderStatus-payment_failed';
+	import OrderStatusPending from '@/components/orders/statuses/OrderStatus-pending';
+
 	export default {
 
 		data() {
@@ -49,6 +48,11 @@
 				}
 			}
 		},
+
+        components: {
+			'payment_failed': OrderStatusPaymentFailed,
+            'pending': OrderStatusPending
+        },
 
 		props: {
 			order: {
