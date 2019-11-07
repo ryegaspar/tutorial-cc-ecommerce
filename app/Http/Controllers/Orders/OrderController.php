@@ -22,7 +22,7 @@ class OrderController extends Controller
         $orders = $request->user()->orders()
             ->with([
                 'products',
-                'product.stock',
+                'products.stock',
                 'products.type',
                 'products.product',
                 'products.product.variations',

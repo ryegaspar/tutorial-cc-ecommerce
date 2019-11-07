@@ -20,6 +20,8 @@ class OrderIndexTest extends TestCase
     /** @test */
     public function it_returns_a_collection_of_orders()
     {
+        $this->withoutExceptionHandling();
+
         $user = factory(User::class)->create();
 
         $order = factory(Order::class)->create([
