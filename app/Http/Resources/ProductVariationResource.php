@@ -12,7 +12,7 @@ class ProductVariationResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param Request $request
-     * @return array
+     * @return array|\Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function toArray($request)
     {
@@ -28,6 +28,7 @@ class ProductVariationResource extends JsonResource
             'stock_count'  => (int)$this->stockCount(),
             'type'         => $this->type->name,
             'in_stock'     => $this->inStock(),
+            'product'      => new ProductIndexResource($this->product)
         ];
     }
 }
