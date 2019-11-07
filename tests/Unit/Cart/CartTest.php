@@ -165,15 +165,22 @@ class CartTest extends TestCase
             $user = factory(User::class)->create()
         );
 
-        $user->cart()->attach(
-            $product = factory(ProductVariation::class)->create(), [
+        $product = factory(ProductVariation::class)->create();
+        $anotherProduct = factory(ProductVariation::class)->create();
+
+        $user->cart()->attach([
+            $product->id => [
                 'quantity' => 2
-            ]
-        );
+            ],
+            $anotherProduct->id => [
+                'quantity' => 2
+            ],
+        ]);
 
         $cart->sync();
 
         $this->assertEquals(0, $user->fresh()->cart->first()->pivot->quantity);
+        $this->assertEquals(0, $user->fresh()->cart->get(1)->pivot->quantity);
     }
 
     /** @test */
@@ -183,11 +190,17 @@ class CartTest extends TestCase
             $user = factory(User::class)->create()
         );
 
-        $user->cart()->attach(
-            $product = factory(ProductVariation::class)->create(), [
+        $product = factory(ProductVariation::class)->create();
+        $anotherProduct = factory(ProductVariation::class)->create();
+
+        $user->cart()->attach([
+            $product->id => [
                 'quantity' => 2
-            ]
-        );
+            ],
+            $anotherProduct->id => [
+                'quantity' => 0
+            ],
+        ]);
 
         $cart->sync();
 
