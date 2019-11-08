@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('shipping_method_id')->index();
             $table->string('status')->default('pending');
             $table->integer('subtotal');
+            $table->unsignedBigInteger('payment_method_id')->index();
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -33,6 +34,10 @@ class CreateOrdersTable extends Migration
             $table->foreign('shipping_method_id')
                 ->references('id')
                 ->on('shipping_methods');
+
+            $table->foreign('payment_method_id')
+                ->references('id')
+                ->on('payment_methods');
         });
     }
 
