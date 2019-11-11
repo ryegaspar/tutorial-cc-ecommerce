@@ -5,9 +5,11 @@ namespace Tests\Unit\Models\Orders;
 use App\Cart\Money;
 use App\Models\Address;
 use App\Models\Order;
+use App\Models\PaymentMethod;
 use App\Models\ProductVariation;
 use App\Models\ShippingMethod;
 use App\Models\User;
+use Faker\Provider\Payment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -52,6 +54,16 @@ class OrderTest extends TestCase
         ]);
 
         $this->assertInstanceOf(ShippingMethod::class, $order->shippingMethod);
+    }
+
+    /** @test */
+    public function it_belongs_to_a_payment_method()
+    {
+        $order = factory(Order::class)->create([
+            'user_id' => factory(User::class)->create()->id
+        ]);
+
+        $this->assertInstanceOf(PaymentMethod::class, $order->paymentMethod);
     }
 
     /** @test */
