@@ -12,7 +12,7 @@ class StripeGateway implements Gateway
 
     public function withUser(User $user)
     {
-        $this->user = user;
+        $this->user = $user;
 
         return $this;
     }
