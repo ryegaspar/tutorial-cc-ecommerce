@@ -11,7 +11,7 @@ import _3303259b from '../layouts/partials/Navigation.vue'
 const layouts = { "_default": _6f6c098b,"_partials/Navigation": _3303259b }
 
 export default {
-  head: {"title":"client","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"My cat&#39;s pajamas Nuxt.js project"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[],"script":[]},
+  head: {"title":"client","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"My cat&#39;s pajamas Nuxt.js project"}],"script":[{"src":"https:\u002F\u002Fjs.stripe.com\u002Fv3\u002F"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[]},
 
   render(h, props) {
     const loadingEl = h('NuxtLoading', { ref: 'loading' })

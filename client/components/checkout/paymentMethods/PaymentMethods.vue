@@ -11,19 +11,21 @@
             </template>
 
             <template v-else-if="creating">
-                create payment method
+                <payment-method-creator @cancel="creating = false"
+                                        @added="created"
+                ></payment-method-creator>
             </template>
 
             <template v-else>
                 <template v-if="selectedPaymentMethod">
                     <p>
-                        {{ selectedPaymentMethod.cart_type }} ending {{ selectedPaymentMethod.last_four }}
+                        {{ selectedPaymentMethod.card_type }} ending {{ selectedPaymentMethod.last_four }}
                     </p>
                     <br/>
                 </template>
 
                 <div class="field is-grouped">
-                    <p class="control">
+                    <p class="control" v-if="paymentMethods.length">
                         <a href=""
                            class="button is-info"
                            @click.prevent="selecting = true"
@@ -48,6 +50,7 @@
 
 <script>
     import PaymentMethodSelector from "./PaymentMethodSelector";
+    import PaymentMethodCreator from "./PaymentMethodCreator";
 
 	export default {
 		data() {
@@ -73,7 +76,8 @@
 		},
 
 		components: {
-			PaymentMethodSelector
+			PaymentMethodSelector,
+            PaymentMethodCreator
         },
 
 		computed: {

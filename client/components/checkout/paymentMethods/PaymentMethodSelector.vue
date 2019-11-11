@@ -4,7 +4,7 @@
         <tr v-for="paymentMethod in paymentMethods" :key="paymentMethod.id">
             <td>
                 <p :class="{ 'has-text-weight-bold': paymentMethod.id === selectedPaymentMethod.id }">
-                    {{ paymentMethod.card_type }} ending in {{ paymentMehtod.last_four }}
+                    {{ paymentMethod.card_type }} ending in {{ paymentMethod.last_four }}
                 </p>
             </td>
             <td>
