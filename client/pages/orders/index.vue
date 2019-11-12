@@ -38,6 +38,10 @@
             }
         },
 
+        middleware: [
+        	'redirectIfGuest'
+        ],
+
 		components: {
 			Order
         },
