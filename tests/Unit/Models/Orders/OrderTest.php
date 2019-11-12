@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\PaymentMethod;
 use App\Models\ProductVariation;
 use App\Models\ShippingMethod;
+use App\Models\Transaction;
 use App\Models\User;
 use Faker\Provider\Payment;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -132,5 +133,19 @@ class OrderTest extends TestCase
         ]);
 
         $this->assertEquals(2000, $order->total()->amount());
+    }
+
+    /** @test */
+    public function it_has_many_transactions()
+    {
+        $order = factory(Order::class)->create([
+            'user_id' => factory(User::class)->create()->id
+        ]);
+
+        $transaction = factory(Transaction::class)->create([
+            'order_id' => $order->id
+        ]);
+
+        $this->assertInstanceOf(Transaction::class, $order->transactions->first());
     }
 }
