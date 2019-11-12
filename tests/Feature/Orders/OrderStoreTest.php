@@ -276,6 +276,8 @@ class OrderStoreTest extends TestCase
     /** @test */
     public function it_empties_the_cart_when_ordering()
     {
+        $this->withoutExceptionHandling();
+
         $user = factory(User::class)->create();
 
         $user->cart()->sync(
@@ -307,6 +309,14 @@ class OrderStoreTest extends TestCase
 
     protected function orderDependencies(User $user)
     {
+        $stripeCustomer = \Stripe\Customer::create([
+            'email' => $user->email,
+        ]);
+
+        $user->update([
+            'gateway_customer_id' => $stripeCustomer->id
+        ]);
+
         $address = factory(Address::class)->create([
             'user_id' => $user->id
         ]);

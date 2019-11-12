@@ -33,7 +33,7 @@ class ProcessPayment implements ShouldQueue
      */
     public function handle(OrderCreated $event)
     {
-        $order = $event->event;
+        $order = $event->order;
 
         try {
 
